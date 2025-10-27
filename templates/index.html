@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Daily Quote Generator{% endblock %}
+
+{% block content %}
+<div class="quote-container">
+    {% if quote %}
+        <div class="quote-card">
+            <blockquote class="quote-text">
+                "{{ quote.quote_text }}"
+            </blockquote>
+            <cite class="quote-author">— {{ quote.author }}</cite>
+        </div>
+        
+        <div class="quote-actions">
+            <a href="{{ url_for('new_quote') }}" class="btn btn-primary" id="new-quote-btn">New Random Quote</a>
+            <button class="btn btn-secondary" id="favorite-btn">❤️ Favorite</button>
+        </div>
+        
+        <div class="quote-meta">
+            <small class="quote-date">Added on {{ quote.created_at | format_date }}</small>
+        </div>
+    {% else %}
+        <div class="no-quotes">
+            <h2>No quotes available</h2>
+            <p>It looks like there are no quotes in the database yet.</p>
+            <a href="{{ url_for('add_quote_page') }}" class="btn btn-primary">Add First Quote</a>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Quote statistics -->
+<div class="quote-stats">
+    <h3>Quote Statistics</h3>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Total Quotes</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Inspiration</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Available</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
